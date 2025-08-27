@@ -48,7 +48,7 @@ const TrendingItemCard = props => {
       {({themeColor}) => (
         <TrendingCardLink to={`/videos/${id}`}>
           <TrendingCardBg>
-            <TrendingCardImage src={thumbnailurl} />
+            <TrendingCardImage src={thumbnailurl} alt="video thumbnail" />
             <TrendingCardItemContainer>
               <TrendingChannelPicContainer>
                 <TrendingCardItemChannelPic src={profileImageUrl} />
@@ -62,9 +62,11 @@ const TrendingItemCard = props => {
                     {name}
                   </TrendingCardChannelName>
                   <TrendingcardItemLikeAndTimeContainer>
-                    <TrendingCardListItem>{viewCount}</TrendingCardListItem>
                     <TrendingCardListItem>
-                      {publishedYears} years ago
+                      <p>{viewCount}</p>
+                    </TrendingCardListItem>
+                    <TrendingCardListItem>
+                      <p>{publishedYears} years ago</p>
                     </TrendingCardListItem>
                   </TrendingcardItemLikeAndTimeContainer>
                 </TrendingCardItemTextContentContainer>

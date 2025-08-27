@@ -46,10 +46,10 @@ const SavedVideosCardItem = props => {
               </SavedVideosCardItemViews>
               <SavedVideosCardItemViewSection>
                 <SavedVideosCardItemViewItem themecolor={themeColor}>
-                  {viewCount} views
+                  <p>{viewCount} views</p>
                 </SavedVideosCardItemViewItem>
                 <SavedVideosCardItemViewItem themecolor={themeColor}>
-                  {publishedYears} years ago
+                  <p>{publishedYears} years ago</p>
                 </SavedVideosCardItemViewItem>
               </SavedVideosCardItemViewSection>
             </SavedVideosCarditemTextContainer>

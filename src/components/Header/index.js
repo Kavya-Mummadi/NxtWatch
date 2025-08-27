@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
+import Popup from 'reactjs-popup'
 import {Link, withRouter} from 'react-router-dom'
 import NxtwatchContext from '../../context/NxtwatchContext'
 
@@ -10,11 +11,16 @@ import {
   NxtwatchHeaderSmallDetailsContainer,
   MoonIcon,
   BarsIcon,
+  ThemeButton,
   NxtwatchHeaderDetailsListitem,
   NxtwatchHeaderProfile,
   NxtwatchHeaderLogoutbutton,
   LogoutIcon,
   SunnyIcon,
+  PopUpButtonText,
+  ClosePopUpBg,
+  PopUpButtonsContainer,
+  PopUpButtons,
 } from './styledComponents'
 
 class Header extends Component {
@@ -36,13 +42,18 @@ class Header extends Component {
           const ThemeIcon = themeColor === 'light' ? MoonIcon : SunnyIcon
 
           return (
-            <NxtwatchHeaderContainer themeColor={themeColor}>
+            <NxtwatchHeaderContainer themecolor={themeColor}>
               <Link to="/">
-                <NxtwatchHeaderLogo src={nxtWatchLogoUrl} alt="" />
+                <NxtwatchHeaderLogo src={nxtWatchLogoUrl} alt="website logo" />
               </Link>
               <NxtwatchHeaderSmallDetailsContainer>
                 <NxtwatchHeaderDetailsListitem>
-                  <ThemeIcon onClick={setThemeColor} themecolor={themeColor} />
+                  <ThemeButton data-testid="theme">
+                    <ThemeIcon
+                      onClick={setThemeColor}
+                      themecolor={themeColor}
+                    />
+                  </ThemeButton>
                 </NxtwatchHeaderDetailsListitem>
                 <NxtwatchHeaderDetailsListitem>
                   <BarsIcon />
@@ -53,21 +64,62 @@ class Header extends Component {
               </NxtwatchHeaderSmallDetailsContainer>
               <NxtwatchHeaderMediumDetailsContainer>
                 <NxtwatchHeaderDetailsListitem>
-                  <ThemeIcon themecolor={themeColor} onClick={setThemeColor} />
+                  <ThemeButton data-testid="theme">
+                    <ThemeIcon
+                      themecolor={themeColor}
+                      onClick={setThemeColor}
+                    />
+                  </ThemeButton>
                 </NxtwatchHeaderDetailsListitem>
                 <NxtwatchHeaderDetailsListitem>
                   <NxtwatchHeaderProfile
                     src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
-                    alt=""
+                    alt="profile"
                   />
                 </NxtwatchHeaderDetailsListitem>
                 <NxtwatchHeaderDetailsListitem>
-                  <NxtwatchHeaderLogoutbutton
-                    themecolor={themeColor}
-                    onClick={this.onLogout}
-                  >
-                    Logout
-                  </NxtwatchHeaderLogoutbutton>
+                  <div className="popup-container">
+                    <Popup
+                      modal
+                      overlayStyle={{background: 'rgba(0, 0, 0, 0.7)'}}
+                      trigger={
+                        <NxtwatchHeaderLogoutbutton themecolor={themeColor}>
+                          Logout
+                        </NxtwatchHeaderLogoutbutton>
+                      }
+                    >
+                      {close => (
+                        <ClosePopUpBg themecolor={themeColor}>
+                          <PopUpButtonText themecolor={themeColor}>
+                            Are you sure, you want to logout?
+                          </PopUpButtonText>
+
+                          <PopUpButtonsContainer>
+                            <PopUpButtons
+                              themeColor={themeColor}
+                              type="button"
+                              className="trigger-button"
+                              onClick={() => close()}
+                            >
+                              Cancel
+                            </PopUpButtons>
+                            <PopUpButtons
+                              themeColor={themeColor}
+                              type="button"
+                              className="trigger-button"
+                              onClick={() => {
+                                this.onLogout()
+                                close()
+                              }}
+                              $variant="confirm"
+                            >
+                              Confirm
+                            </PopUpButtons>
+                          </PopUpButtonsContainer>
+                        </ClosePopUpBg>
+                      )}
+                    </Popup>
+                  </div>
                 </NxtwatchHeaderDetailsListitem>
               </NxtwatchHeaderMediumDetailsContainer>
             </NxtwatchHeaderContainer>

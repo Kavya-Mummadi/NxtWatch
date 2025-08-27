@@ -25,6 +25,9 @@ import {
   NxtWatchCardsContainer,
   LoaderContainer,
   LoaderContent,
+  CloseButton,
+  NxtwatchBannerButtonContainer,
+  NxtwatchHomeRouteBg,
 } from './styledComponents'
 import Header from '../Header'
 
@@ -40,6 +43,7 @@ class Home extends Component {
     homeVideosList: [],
     apiStatus: apiStatusConstants.initial,
     searchInput: '',
+    showBanner: true,
   }
 
   componentDidMount() {
@@ -66,6 +70,7 @@ class Home extends Component {
   }
 
   getHomeVideos = async () => {
+    console.log('yes')
     const {searchInput} = this.state
     this.setState({
       apiStatus: apiStatusConstants.loading,
@@ -92,12 +97,18 @@ class Home extends Component {
     }
   }
 
+  onClickCloseBanner = () => {
+    this.setState({
+      showBanner: false,
+    })
+  }
+
   renderDisplay = () => {
     const {apiStatus, homeVideosList} = this.state
     switch (apiStatus) {
       case apiStatusConstants.loading:
         return (
-          <LoaderContainer>
+          <LoaderContainer data-testid="loader">
             <LoaderContent>
               <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
             </LoaderContent>
@@ -109,7 +120,7 @@ class Home extends Component {
           <NxtwatchDynamicContainer>
             <NxtWatchCardsContainer>
               {homeVideosList.length === 0 ? (
-                <NoSearchResults />
+                <NoSearchResults onRetry={this.getHomeVideos} />
               ) : (
                 homeVideosList.map(each => (
                   <NxtWatchCardItem key={each.id} HomeVideoData={each} />
@@ -122,7 +133,7 @@ class Home extends Component {
       case apiStatusConstants.failure:
         return (
           <NxtwatchDynamicContainer>
-            <FailureView />
+            <FailureView onRetry={this.getHomeVideos} />
           </NxtwatchDynamicContainer>
         )
 
@@ -132,21 +143,28 @@ class Home extends Component {
   }
 
   render() {
-    const {searchInput} = this.state
+    const {searchInput, showBanner} = this.state
     return (
       <NxtwatchContext.Consumer>
         {({themeColor}) => (
-          <div>
+          <NxtwatchHomeRouteBg data-testid="home" themecolor={themeColor}>
             <Header />
             <NxtwatchHomeBgContainer>
               <SectionsBar />
               <NxtwatchHomeContentContainer themecolor={themeColor}>
-                <NxtwatchBannerContainer>
-                  <CloseIcon />
+                <NxtwatchBannerContainer
+                  showbanner={showBanner}
+                  data-testid="banner"
+                >
+                  <NxtwatchBannerButtonContainer>
+                    <CloseButton data-testid="close">
+                      <CloseIcon onClick={this.onClickCloseBanner} />
+                    </CloseButton>
+                  </NxtwatchBannerButtonContainer>
                   <NxtWatchBannerContentContainer>
                     <NxtwatchLogo
                       src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-                      alt="logo"
+                      alt="nxt watch logo"
                     />
                     <NxtwatchBannerPara>
                       Buy Nxt Watch Premium prepaid plans with UPI
@@ -166,6 +184,7 @@ class Home extends Component {
                       value={searchInput}
                     />
                     <SearchButton
+                      data-testid="searchButton"
                       type="button"
                       onClick={() => this.getHomeVideos()}
                     >
@@ -176,7 +195,7 @@ class Home extends Component {
                 </NxtwatchHomeDisplayContentContainer>
               </NxtwatchHomeContentContainer>
             </NxtwatchHomeBgContainer>
-          </div>
+          </NxtwatchHomeRouteBg>
         )}
       </NxtwatchContext.Consumer>
     )

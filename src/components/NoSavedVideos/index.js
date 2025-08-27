@@ -8,7 +8,7 @@ import {
 
 import NxtwatchContext from '../../context/NxtwatchContext'
 
-const NotFound = () => (
+const NoSavedVideos = () => (
   <NxtwatchContext.Consumer>
     {({themeColor}) => (
       <NoSavedVideosBgContainer themecolor={themeColor}>
@@ -21,7 +21,7 @@ const NotFound = () => (
             No saved videos found
           </NoSavedVideosHeading>
           <NoSavedVideosDescription themecolor={themeColor}>
-            You can save your videos while watching them
+            Save your videos by clicking a button
           </NoSavedVideosDescription>
         </NoSavedVideosContentContainer>
       </NoSavedVideosBgContainer>
@@ -29,4 +29,4 @@ const NotFound = () => (
   </NxtwatchContext.Consumer>
 )
 
-export default NotFound
+export default NoSavedVideos

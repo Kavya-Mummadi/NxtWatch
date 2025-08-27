@@ -32,6 +32,7 @@ import {
   NxtwatchVideoSmallChannelDescription,
   LoaderContainer,
   LoaderContent,
+  NxtwatchVideoDetailsRouteBg,
 } from './styledComponents'
 import Header from '../Header'
 import FailureView from '../FailureView'
@@ -125,7 +126,7 @@ class VideoItemDetails extends Component {
       case apiStatusConstants.loading:
         return (
           <NxtwatchDisplayContainer themecolor={themeColor}>
-            <LoaderContainer>
+            <LoaderContainer data-testid="loader">
               <LoaderContent>
                 <Loader
                   type="ThreeDots"
@@ -164,7 +165,7 @@ class VideoItemDetails extends Component {
                     {videoData.viewCount} views
                   </NxtwatchVideoViewItem>
                   <NxtwatchVideoViewItem>
-                    {this.getYearsAgo(videoData.publishedAt)}
+                    <p>{this.getYearsAgo(videoData.publishedAt)}</p>
                   </NxtwatchVideoViewItem>
                 </NxtwatchViewDetailsContainer>
                 <NxtwatchLikeDetailsContainer>
@@ -200,13 +201,16 @@ class VideoItemDetails extends Component {
               </NxtwatchVideosDetailsContainer>
               <Line />
               <NxtwatchVideoChannelContainer>
-                <NxtwatchVideoChannelPic src={videoData.profileImageUrl} />
+                <NxtwatchVideoChannelPic
+                  src={videoData.profileImageUrl}
+                  alt="channel logo"
+                />
                 <NxtwatchVideoChannelDetailsContainer>
                   <NxtwatchVideoChannelName themecolor={themeColor}>
                     {videoData.name}
                   </NxtwatchVideoChannelName>
                   <NxtwatchChannelSubscribers>
-                    {videoData.subscriberCount} Subscribers
+                    <p>{videoData.subscriberCount} Subscribers</p>
                   </NxtwatchChannelSubscribers>
                   <NxtwatchVideoChannelDecsription themecolor={themeColor}>
                     {videoData.description}
@@ -237,13 +241,16 @@ class VideoItemDetails extends Component {
     return (
       <NxtwatchContext.Consumer>
         {({themeColor, savedVideos, addToSavedVideos}) => (
-          <div>
+          <NxtwatchVideoDetailsRouteBg
+            data-testid="VideoItemDetails"
+            themecolor={themeColor}
+          >
             <Header />
             <NxtwatchHomeBgContainer themecolor={themeColor}>
               <SectionsBar />
               {this.getVideoDataView(themeColor, savedVideos, addToSavedVideos)}
             </NxtwatchHomeBgContainer>
-          </div>
+          </NxtwatchVideoDetailsRouteBg>
         )}
       </NxtwatchContext.Consumer>
     )

@@ -4,7 +4,7 @@ import {
   NxtwatchCardItemThumbnail,
   NxtwatchCardText,
   NxtwatchCardItemProfilePic,
-  NxtwatchCardItemHeading,
+  NxtwatchCardItemPara,
   NxtwtachCardItemViewerDetailsSection,
   NxtwtachCardItemChannelName,
   NxtwatchCardItemViewSection,
@@ -47,23 +47,29 @@ const NxtWatchCardItem = props => {
       {({themeColor}) => (
         <LinkVideos to={`/videos/${id}`}>
           <NxtwatchCardItemBgContainer>
-            <NxtwatchCardItemThumbnail src={thumbnailUrl} />
+            <NxtwatchCardItemThumbnail
+              src={thumbnailUrl}
+              alt="video thumbnail"
+            />
             <NxtwatchCardTextContainer>
-              <NxtwatchCardItemProfilePic src={profileImageUrl} />
+              <NxtwatchCardItemProfilePic
+                src={profileImageUrl}
+                alt="channel logo"
+              />
               <NxtwatchCardText>
-                <NxtwatchCardItemHeading themecolor={themeColor}>
+                <NxtwatchCardItemPara themecolor={themeColor}>
                   {title}
-                </NxtwatchCardItemHeading>
+                </NxtwatchCardItemPara>
                 <NxtwtachCardItemViewerDetailsSection>
                   <NxtwtachCardItemChannelName themecolor={themeColor}>
                     {name}
                   </NxtwtachCardItemChannelName>
                   <NxtwatchCardItemViewSection>
                     <NxtwatchCardItemViewItem themecolor={themeColor}>
-                      {viewCount}
+                      <p>{viewCount}</p>
                     </NxtwatchCardItemViewItem>
                     <NxtwatchCardItemViewItem themecolor={themeColor}>
-                      {publishedLater}
+                      <p>{publishedLater}</p>
                     </NxtwatchCardItemViewItem>
                   </NxtwatchCardItemViewSection>
                 </NxtwtachCardItemViewerDetailsSection>

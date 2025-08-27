@@ -21,14 +21,25 @@ class App extends Component {
   }
 
   componentDidMount() {
+    console.log(window.location.pathname)
+    const {history} = this.props
     if (window.location.pathname !== '/') {
-      const {history} = this.props
       const jwtToken = Cookies.get('jwt_token')
       if (jwtToken === undefined) {
         history.replace('/login')
-      } else {
-        history.replace('/')
-      }
+      } else if (window.location.pathname === '/trending') {
+          history.replace('/trending')
+          this.setState({activeTabId: 'TRENDING'})
+        } else if (window.location.pathname === '/gaming') {
+          history.replace('/gaming')
+          this.setState({activeTabId: 'GAMING'})
+        } else if (window.location.pathname === '/saved-videos') {
+          history.replace('/saved-videos')
+          this.setState({activeTabId: 'SAVED VIDEOS'})
+        } else {
+          history.replace('/')
+          this.setState({activeTabId: 'HOME'})
+        }
     }
   }
 
@@ -89,7 +100,7 @@ class App extends Component {
             path="/videos/:id"
             component={VideoItemDetails}
           />
-          <ProtectedRoute exact path="/not-found" component={NotFound} />
+          <Route exact path="/not-found" component={NotFound} />
           <Redirect to="/not-found" />
         </Switch>
       </NxtwatchContext.Provider>

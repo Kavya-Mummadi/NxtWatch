@@ -12,7 +12,7 @@ import {
   SavedVideosIcon,
   NxtwatchSectionTitle,
   NxtwatchSectionsFooter,
-  NxtwatchFooterHeading,
+  NxtwatchFooterPara,
   NxtwatchSocialMediaIcons,
   NxtwatchSocialMediaImages,
   NxtwatchFooterCaption,
@@ -27,29 +27,29 @@ class SectionsBar extends Component {
           const Sections = [
             {
               id: uuidv4(),
-              name: 'Home',
+              displayText: 'Home',
               route: '/',
               sectionId: 'HOME',
               icon: <HomeIcon themecolor={themeColor} />,
             },
             {
               id: uuidv4(),
-              name: 'Trending',
+              displayText: 'Trending',
               sectionId: 'TRENDING',
               route: '/trending',
               icon: <TrendingIcon themecolor={themeColor} />,
             },
             {
               id: uuidv4(),
-              name: 'Gaming',
+              displayText: 'Gaming',
               sectionId: 'GAMING',
               route: '/gaming',
               icon: <GamingIcon themecolor={themeColor} />,
             },
             {
               id: uuidv4(),
-              name: 'Saved Videos',
-              sectionId: 'SAVEDVIDEOS',
+              displayText: 'Saved Videos',
+              sectionId: 'SAVED VIDEOS',
               route: '/saved-videos',
               icon: <SavedVideosIcon themecolor={themeColor} />,
             },
@@ -68,7 +68,7 @@ class SectionsBar extends Component {
                     <LinkEl to={each.route}>
                       {each.icon}
                       <NxtwatchSectionTitle themecolor={themeColor}>
-                        {each.name}
+                        {each.displayText}
                       </NxtwatchSectionTitle>
                     </LinkEl>
                   </NxtwatchSectionItem>
@@ -76,9 +76,9 @@ class SectionsBar extends Component {
               </NxtwatchSections>
 
               <NxtwatchSectionsFooter>
-                <NxtwatchFooterHeading themecolor={themeColor}>
+                <NxtwatchFooterPara themecolor={themeColor}>
                   CONTACT US
-                </NxtwatchFooterHeading>
+                </NxtwatchFooterPara>
                 <NxtwatchSocialMediaIcons>
                   <NxtwatchSocialMediaImages
                     src="https://assets.ccbp.in/frontend/react-js/nxt-watch-facebook-logo-img.png"
@@ -90,7 +90,7 @@ class SectionsBar extends Component {
                   />
                   <NxtwatchSocialMediaImages
                     src="https://assets.ccbp.in/frontend/react-js/nxt-watch-linked-in-logo-img.png"
-                    alt="linkedin logo"
+                    alt="linked in logo"
                   />
                 </NxtwatchSocialMediaIcons>
                 <NxtwatchFooterCaption themecolor={themeColor}>

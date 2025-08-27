@@ -4,13 +4,14 @@ import Header from '../Header'
 import SectionsBar from '../SectionsBar'
 import SavedVideosCardItem from '../SavedVideosCardItem'
 import RouteHeader from '../RouteHeader'
-import NosavedVideos from '../NoSavedVideos'
+import NoSavedVideos from '../NoSavedVideos'
 import NxtwatchContext from '../../context/NxtwatchContext'
 
 import {
   NxtwatchHomeBgContainer,
   NxtwatchSavedVideosContentContainer,
   NxtwatchSavedVideosCardItemsContainer,
+  NxtwatchSavedVideosRouteBg,
 } from './styledComponents'
 
 class SavedVideos extends Component {
@@ -18,13 +19,16 @@ class SavedVideos extends Component {
     return (
       <NxtwatchContext.Consumer>
         {({themeColor, savedVideos}) => (
-          <div>
+          <NxtwatchSavedVideosRouteBg
+            data-testid="savedVideos"
+            themecolor={themeColor}
+          >
             <Header />
             <NxtwatchHomeBgContainer themecolor={themeColor}>
               <SectionsBar />
               <NxtwatchSavedVideosContentContainer>
                 {savedVideos.length === 0 ? (
-                  <NosavedVideos />
+                  <NoSavedVideos />
                 ) : (
                   <>
                     <RouteHeader />
@@ -39,7 +43,7 @@ class SavedVideos extends Component {
                 )}
               </NxtwatchSavedVideosContentContainer>
             </NxtwatchHomeBgContainer>
-          </div>
+          </NxtwatchSavedVideosRouteBg>
         )}
       </NxtwatchContext.Consumer>
     )

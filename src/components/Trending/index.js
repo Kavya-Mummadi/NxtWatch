@@ -14,6 +14,7 @@ import {
   NxtwatchTrendingCardItemsContainer,
   LoaderContainer,
   LoaderContent,
+  NxtwatchTrendingRouteBg,
 } from './styledComponents'
 import Header from '../Header'
 
@@ -31,7 +32,7 @@ class Trending extends Component {
   }
 
   componentDidMount() {
-    this.getTrendingVideos()
+    this.getTrendingInformation()
   }
 
   onTredingViewSuccess = trendingVideosData => {
@@ -49,7 +50,7 @@ class Trending extends Component {
     })
   }
 
-  getTrendingVideos = async () => {
+  getTrendingInformation = async () => {
     this.setState({
       apiStatus: apiStatusConstants.loading,
     })
@@ -80,7 +81,7 @@ class Trending extends Component {
     switch (apiStatus) {
       case apiStatusConstants.loading:
         return (
-          <LoaderContainer>
+          <LoaderContainer data-testid="loader">
             <LoaderContent>
               <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
             </LoaderContent>
@@ -99,7 +100,7 @@ class Trending extends Component {
       case apiStatusConstants.failure:
         return (
           <NxtwatchTrendingCardItemsContainer themecolor={themeColor}>
-            <FailureView />
+            <FailureView onRetry={this.getTrendingInformation} />
           </NxtwatchTrendingCardItemsContainer>
         )
 
@@ -112,7 +113,10 @@ class Trending extends Component {
     return (
       <NxtwatchContext.Consumer>
         {({themeColor}) => (
-          <div>
+          <NxtwatchTrendingRouteBg
+            data-testid="trending"
+            themecolor={themeColor}
+          >
             <Header />
             <NxtwatchHomeBgContainer>
               <SectionsBar />
@@ -121,7 +125,7 @@ class Trending extends Component {
                 {this.gettrendingViewData(themeColor)}
               </NxtwatchTrendingContentContainer>
             </NxtwatchHomeBgContainer>
-          </div>
+          </NxtwatchTrendingRouteBg>
         )}
       </NxtwatchContext.Consumer>
     )

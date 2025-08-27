@@ -147,7 +147,7 @@ class Login extends Component {
         <NxtWatchLoginContainer>
           <NxtWatchLogo
             src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-            alt=" nxt watch logo"
+            alt="website logo"
           />
           <form onSubmit={this.onSubmitLoginForm}>
             {this.renderLoginUsernameField()}

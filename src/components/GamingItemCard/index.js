@@ -17,7 +17,7 @@ const GamingItemCard = props => {
       {({themeColor}) => (
         <GamingCardLink to={`/videos/${id}`}>
           <GamingCardBg>
-            <GamingCardImage src={thumbnailUrl} alt={title} />
+            <GamingCardImage src={thumbnailUrl} alt="video thumbnail" />
             <GamingCarditemTextContainer>
               <GamingCardItemTitle themecolor={themeColor}>
                 {title}

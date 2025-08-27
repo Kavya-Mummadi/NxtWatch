@@ -11,9 +11,10 @@ import NxtwatchContext from '../../context/NxtwatchContext'
 import {
   NxtwatchHomeBgContainer,
   NxtwatchGamingContentContainer,
-  NxtwatchTrendingCardItemsContainer,
+  NxtwatchGamingCardItemsContainer,
   LoaderContainer,
   LoaderContent,
+  NxtwatchGamingRouteBg,
 } from './styledComponents'
 import Header from '../Header'
 
@@ -75,7 +76,7 @@ class Gaming extends Component {
     switch (apiStatus) {
       case apiStatusConstants.loading:
         return (
-          <LoaderContainer>
+          <LoaderContainer data-testid="loader">
             <LoaderContent>
               <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
             </LoaderContent>
@@ -84,18 +85,18 @@ class Gaming extends Component {
 
       case apiStatusConstants.success:
         return (
-          <NxtwatchTrendingCardItemsContainer themecolor={themeColor}>
+          <NxtwatchGamingCardItemsContainer themecolor={themeColor}>
             {gamingData.map(each => (
               <GamingItemCard key={each.id} gamingDetails={each} />
             ))}
-          </NxtwatchTrendingCardItemsContainer>
+          </NxtwatchGamingCardItemsContainer>
         )
 
       case apiStatusConstants.failure:
         return (
-          <NxtwatchTrendingCardItemsContainer>
-            <FailureView />
-          </NxtwatchTrendingCardItemsContainer>
+          <NxtwatchGamingCardItemsContainer>
+            <FailureView onRetry={this.getGamingInformation} />
+          </NxtwatchGamingCardItemsContainer>
         )
 
       default:
@@ -107,7 +108,7 @@ class Gaming extends Component {
     return (
       <NxtwatchContext.Consumer>
         {({themeColor}) => (
-          <div>
+          <NxtwatchGamingRouteBg themecolor={themeColor}>
             <Header />
             <NxtwatchHomeBgContainer>
               <SectionsBar />
@@ -116,7 +117,7 @@ class Gaming extends Component {
                 {this.getGamingViewData(themeColor)}
               </NxtwatchGamingContentContainer>
             </NxtwatchHomeBgContainer>
-          </div>
+          </NxtwatchGamingRouteBg>
         )}
       </NxtwatchContext.Consumer>
     )

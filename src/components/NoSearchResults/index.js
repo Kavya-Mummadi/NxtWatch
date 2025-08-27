@@ -8,7 +8,7 @@ import {
 } from './styledComponents'
 import NxtwatchContext from '../../context/NxtwatchContext'
 
-const NoSearchResults = () => (
+const NoSearchResults = ({onRetry}) => (
   <NxtwatchContext.Consumer>
     {({themeColor}) => (
       <NoSearchResultsBgContainer themecolor={themeColor}>
@@ -21,9 +21,13 @@ const NoSearchResults = () => (
             No Search results found
           </NoSearchResultsHeading>
           <NoSearchResultsDescription themecolor={themeColor}>
-            Try different Keywords or remove search filter
+            Try different key words or remove search filter
           </NoSearchResultsDescription>
-          <NoSearchResultsButton type="button" themecolor={themeColor}>
+          <NoSearchResultsButton
+            type="button"
+            themecolor={themeColor}
+            onClick={onRetry}
+          >
             Retry
           </NoSearchResultsButton>
         </NoSearchResultsContentContainer>
@@ -31,4 +35,5 @@ const NoSearchResults = () => (
     )}
   </NxtwatchContext.Consumer>
 )
+
 export default NoSearchResults
