@@ -21,7 +21,7 @@ class Login extends Component {
     username: '',
     password: '',
     errorMessage: '',
-    showErrorMessage: '',
+    showErrorMessage: false,
     tooglePassword: false,
   }
 

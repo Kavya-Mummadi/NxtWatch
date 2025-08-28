@@ -28,18 +28,18 @@ class App extends Component {
       if (jwtToken === undefined) {
         history.replace('/login')
       } else if (window.location.pathname === '/trending') {
-          history.replace('/trending')
-          this.setState({activeTabId: 'TRENDING'})
-        } else if (window.location.pathname === '/gaming') {
-          history.replace('/gaming')
-          this.setState({activeTabId: 'GAMING'})
-        } else if (window.location.pathname === '/saved-videos') {
-          history.replace('/saved-videos')
-          this.setState({activeTabId: 'SAVED VIDEOS'})
-        } else {
-          history.replace('/')
-          this.setState({activeTabId: 'HOME'})
-        }
+        history.replace('/trending')
+        this.setState({activeTabId: 'TRENDING'})
+      } else if (window.location.pathname === '/gaming') {
+        history.replace('/gaming')
+        this.setState({activeTabId: 'GAMING'})
+      } else if (window.location.pathname === '/saved-videos') {
+        history.replace('/saved-videos')
+        this.setState({activeTabId: 'SAVED VIDEOS'})
+      } else {
+        history.replace('/')
+        this.setState({activeTabId: 'HOME'})
+      }
     }
   }
 
