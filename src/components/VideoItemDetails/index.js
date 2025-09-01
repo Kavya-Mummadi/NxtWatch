@@ -74,16 +74,15 @@ class VideoItemDetails extends Component {
     const data = await response.json()
     if (response.ok === true) {
       const updatedVideoData = {
-        id: data.video_details.id,
-        title: data.video_details.title,
-        thumbnailUrl: data.video_details.thumbnail_url,
-        videoUrl: data.video_details.video_url,
-        description: data.video_details.description,
-        viewCount: data.video_details.view_count,
-        publishedAt: data.video_details.published_at,
-        name: data.video_details.channel.name,
-        profileImageUrl: data.video_details.channel.profile_image_url,
-        subscriberCount: data.video_details.channel.subscriber_count,
+        id: data.video_details?.id || '',
+        title: data.video_details?.title || '',
+        thumbnailUrl: data.video_details?.thumbnail_url || '',
+        videoUrl: data.video_details?.video_url || '',
+        description: data.video_details?.description || '',
+        viewCount: data.video_details?.view_count || '',
+        publishedAt: data.video_details?.published_at || '',
+        profileImageUrl: data.video_details?.channel?.profile_image_url || '',
+        subscriberCount: data.video_details?.channel?.subscriber_count || '',
       }
       this.setState({
         apiStatus: apiStatusConstants.success,
