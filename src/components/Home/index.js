@@ -78,7 +78,7 @@ class Home extends Component {
     const jwtToken = Cookies.get('jwt_token')
     const options = {
       headers: {
-        Authorization: `earer ${jwtToken}`,
+        Authorization: `Bearer ${jwtToken}`,
       },
       method: 'GET',
     }
