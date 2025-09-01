@@ -95,7 +95,7 @@ class Gaming extends Component {
       case apiStatusConstants.failure:
         return (
           <NxtwatchGamingCardItemsContainer>
-            <FailureView onRetry={this.getGamingInformation} />
+            <FailureView onRetry={this.getGamingData} />
           </NxtwatchGamingCardItemsContainer>
         )
 
